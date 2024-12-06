@@ -28,17 +28,17 @@ private:
   std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
   rclcpp::TimerBase::SharedPtr timer_;
 
-  void send_fixed_transform()
-  {
+void send_fixed_transform()
+{
     geometry_msgs::msg::TransformStamped t;
     t.header.stamp = this->get_clock()->now();  
     t.header.frame_id = "world"; 
     t.child_frame_id = "target_0";  
 
     // 固定座標を設定
-    t.transform.translation.x = 0.4;
-    t.transform.translation.y = 0.2;
-    t.transform.translation.z = 0.05;
+    t.transform.translation.x = 0.5;
+    t.transform.translation.y = 0.0;
+    t.transform.translation.z = 0.1;
 
     // ここ後で消してもいいかも
     t.transform.rotation.x = 0.0;
@@ -48,8 +48,15 @@ private:
 
     tf_broadcaster_->sendTransform(t);
 
-    RCLCPP_INFO(this->get_logger(), "固定座標: [0.5, 0.0, 0.05]");
-  }
+    // 固定座標をターミナルに出力
+    RCLCPP_INFO(
+        this->get_logger(), 
+        "固定座標: [x: %.2f, y: %.2f]", 
+        t.transform.translation.x, 
+        t.transform.translation.y
+    );
+}
+
 };
 
 int main(int argc, char * argv[])
