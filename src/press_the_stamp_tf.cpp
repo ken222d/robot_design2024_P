@@ -186,7 +186,7 @@ private:
     const double GRIPPER_DEFAULT = 0.0;
     const double GRIPPER_OPEN = angles::from_degrees(60.0);
     const double GRIPPER_CLOSE = angles::from_degrees(15.0);
-    const int move_steps = 10;
+    const int move_steps = 20;
 
     // 現在位置を取得
     geometry_msgs::msg::Pose current_pose = move_group_arm_->getCurrentPose().pose;
@@ -216,7 +216,7 @@ private:
 
     // ハンコを押す動作を-1°ずつ5回のループで実行
     for (int i = 0; i < 5; ++i) {
-        move_specific_joint(1, -1); // -1°ずつ動かす
+        move_specific_joint(1, -4); // -1°ずつ動かす
         std::cout << "Step " << (i + 1) << ": Joint moved by -1°" << std::endl;
     }
 
@@ -226,7 +226,7 @@ private:
 
     // ハンコを離す動作を0.5°ずつ5回のループで実行
     for (int i = 0; i < 5; ++i) {
-        move_specific_joint(1, 1); // 0.5°ずつ動かす
+        move_specific_joint(1, 4); // 0.5°ずつ動かす
         std::cout << "Step " << (i + 1) << ": Joint moved by 1°" << std::endl;
     }
 
