@@ -145,6 +145,7 @@ private:
         t.header = msg->header;
         t.child_frame_id = "target_0";
         t.transform.translation.x = object_position.x;
+	std::cout << "x座標:" << t.transform.translation.x << std::endl;
         t.transform.translation.y = object_position.y;
         t.transform.translation.z = object_position.z;
         tf_broadcaster_->sendTransform(t);
