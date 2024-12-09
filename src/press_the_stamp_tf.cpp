@@ -47,7 +47,7 @@ public:
   PickAndPlaceTf(
     rclcpp::Node::SharedPtr move_group_arm_node,
     rclcpp::Node::SharedPtr move_group_gripper_node)
-  : Node("pick_and_move_tf_node")
+  : Node("press_the_stamp_tf_node")
   {
     using namespace std::placeholders;
     move_group_arm_ = std::make_shared<MoveGroupInterface>(move_group_arm_node, "arm");
@@ -279,10 +279,10 @@ int main(int argc, char ** argv)
   auto move_group_gripper_node = rclcpp::Node::make_shared("move_group_gripper_node", node_options);
 
   rclcpp::executors::MultiThreadedExecutor exec;
-  auto pick_and_move_tf_node = std::make_shared<PickAndPlaceTf>(
+  auto press_the_stamp_tf_node = std::make_shared<PickAndPlaceTf>(
     move_group_arm_node,
     move_group_gripper_node);
-  exec.add_node(pick_and_move_tf_node);
+  exec.add_node(press_the_stamp_tf_node);
   exec.add_node(move_group_arm_node);
   exec.add_node(move_group_gripper_node);
   exec.spin();
